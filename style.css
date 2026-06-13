@@ -1,0 +1,530 @@
+/*
+ * =============================================================
+ * SONGO — Version Ekang
+ * Description : Feuille de style principale
+ *TCHAKUI KENGNE NOE LANDRY 24F2520
+ * 
+ * =============================================================
+ */
+
+/* ─── VARIABLES GLOBALES ────────────────────────────────────── */
+:root {
+  --couleur-fond        : #f0ebe0;
+  --couleur-plateau     : #c8a97e;
+  --couleur-plateau-bord: #9c7a52;
+  --couleur-case        : #e6d5be;
+  --couleur-case-bord   : #b08a60;
+  --couleur-case-hover  : #d4b896;
+  --couleur-case-active : #a07040;
+  --couleur-case-invalide: #ccc0b0;
+  --couleur-graine      : #3e2a14;
+  --couleur-texte       : #2c1e10;
+  --couleur-texte-doux  : #7a6040;
+  --couleur-accent      : #6b4c2a;
+  --couleur-nord        : #4a3520;
+  --couleur-sud         : #6b4c2a;
+  --couleur-separation  : #9c7a52;
+  --couleur-modale-fond : rgba(30, 18, 8, 0.65);
+
+  --rayon-case          : 8px;
+  --rayon-graine        : 50%;
+  --ombre-case          : 0 2px 6px rgba(60, 30, 0, 0.18);
+  --ombre-plateau       : 0 8px 32px rgba(60, 30, 0, 0.22);
+
+  --taille-case         : 72px;
+  --ecart-case          : 8px;
+  --police-titre        : 'Georgia', 'Times New Roman', serif;
+  --police-corps        : 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+}
+
+/* ─── RESET & BASE ──────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--couleur-fond);
+  color: var(--couleur-texte);
+  font-family: var(--police-corps);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  padding-bottom: 40px;
+}
+
+/* ─── EN-TÊTE ───────────────────────────────────────────────── */
+.entete {
+  width: 100%;
+  max-width: 700px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 28px 24px 16px;
+  gap: 16px;
+}
+
+.titre-bloc {
+  text-align: center;
+  flex: 1;
+}
+
+.titre-jeu {
+  font-family: var(--police-titre);
+  font-size: 2.4rem;
+  font-weight: normal;
+  letter-spacing: 0.08em;
+  color: var(--couleur-texte);
+  line-height: 1;
+}
+
+.sous-titre {
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--couleur-texte-doux);
+  margin-top: 4px;
+}
+
+.joueur-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 90px;
+  padding: 12px 16px;
+  border-radius: 8px;
+  background: transparent;
+  transition: background 0.25s;
+}
+
+/* Mise en évidence du joueur actif */
+.joueur-info.actif {
+  background: var(--couleur-plateau-bord);
+  box-shadow: var(--ombre-case);
+}
+
+.joueur-nom {
+  font-family: var(--police-titre);
+  font-size: 1rem;
+  font-weight: normal;
+  letter-spacing: 0.06em;
+  color: var(--couleur-texte);
+}
+
+.joueur-score-label {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--couleur-texte-doux);
+  margin-top: 4px;
+}
+
+.joueur-score {
+  font-size: 2rem;
+  font-family: var(--police-titre);
+  color: var(--couleur-texte);
+  line-height: 1.1;
+  margin-top: 2px;
+}
+
+/* ─── BANDEAU DE STATUT ─────────────────────────────────────── */
+.bandeau-statut {
+  width: 100%;
+  max-width: 700px;
+  text-align: center;
+  padding: 8px 24px 12px;
+  min-height: 54px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.message-tour {
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--couleur-texte);
+}
+
+.message-info {
+  font-size: 0.82rem;
+  color: var(--couleur-texte-doux);
+  min-height: 18px;
+  font-style: italic;
+}
+
+/* ─── PLATEAU ───────────────────────────────────────────────── */
+.plateau-conteneur {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 0 16px;
+}
+
+.plateau {
+  background: var(--couleur-plateau);
+  border: 3px solid var(--couleur-plateau-bord);
+  border-radius: 16px;
+  padding: 20px 20px 18px;
+  box-shadow: var(--ombre-plateau);
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  width: fit-content;
+}
+
+/* Étiquettes de colonnes (1 à 7) */
+.etiquettes-colonnes {
+  display: flex;
+  gap: var(--ecart-case);
+  justify-content: center;
+  padding-bottom: 6px;
+  padding-left: calc(72px + 10px); /* décalage pour l'étiquette de camp */
+}
+
+.etiquettes-colonnes span {
+  width: var(--taille-case);
+  text-align: center;
+  font-size: 0.68rem;
+  color: var(--couleur-texte-doux);
+  letter-spacing: 0.05em;
+  opacity: 0.7;
+}
+
+/* ─── CAMPS ─────────────────────────────────────────────────── */
+.camp {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.camp-etiquette {
+  width: 62px;
+  text-align: right;
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--couleur-texte-doux);
+  padding-right: 8px;
+  flex-shrink: 0;
+}
+
+/* Le camp Sud a son étiquette après la rangée */
+#camp-sud .camp-etiquette {
+  text-align: left;
+  padding-right: 0;
+  padding-left: 8px;
+}
+
+/* Séparateur entre les deux camps */
+.separateur {
+  height: 2px;
+  background: var(--couleur-separation);
+  margin: 8px 0;
+  border-radius: 2px;
+  opacity: 0.5;
+}
+
+/* ─── RANGÉES DE CASES ──────────────────────────────────────── */
+.rangee {
+  display: flex;
+  gap: var(--ecart-case);
+}
+
+/* ─── CASES INDIVIDUELLES ───────────────────────────────────── */
+.case {
+  width: var(--taille-case);
+  height: var(--taille-case);
+  background: var(--couleur-case);
+  border: 2px solid var(--couleur-case-bord);
+  border-radius: var(--rayon-case);
+  box-shadow: var(--ombre-case);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: default;
+  position: relative;
+  transition: background 0.18s, transform 0.12s, border-color 0.18s;
+  user-select: none;
+}
+
+/* Cases cliquables (appartenant au joueur actif et non vides) */
+.case.jouable {
+  cursor: pointer;
+}
+
+.case.jouable:hover {
+  background: var(--couleur-case-hover);
+  transform: translateY(-2px);
+  border-color: var(--couleur-accent);
+}
+
+.case.jouable:active {
+  transform: translateY(0);
+}
+
+/* Case sélectionnée (en cours de semis) */
+.case.selectionnee {
+  background: var(--couleur-case-active);
+  border-color: var(--couleur-graine);
+}
+
+/* Case mise en évidence lors de l'animation de semis */
+.case.semee {
+  background: var(--couleur-case-hover);
+  border-color: var(--couleur-accent);
+}
+
+/* Case non jouable par règle de solidarité */
+.case.invalide {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ─── COMPTEUR DE GRAINES ───────────────────────────────────── */
+/*
+ * Chaque case affiche le nombre de graines sous forme
+ * d'un compteur numérique et d'une grille de petits ronds.
+ */
+.case-compteur {
+  font-size: 1.25rem;
+  font-family: var(--police-titre);
+  font-weight: normal;
+  color: var(--couleur-graine);
+  line-height: 1;
+}
+
+/* Grille de petites graines visuelles (max 6 affichées) */
+.case-graines-visuelles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px;
+  justify-content: center;
+  max-width: 54px;
+  margin-top: 4px;
+}
+
+.graine-visuelle {
+  width: 9px;
+  height: 9px;
+  border-radius: var(--rayon-graine);
+  background: var(--couleur-graine);
+  opacity: 0.75;
+  flex-shrink: 0;
+}
+
+/* Case vide : discret */
+.case.vide .case-compteur {
+  opacity: 0.25;
+}
+
+/* ─── PIED DE PAGE ──────────────────────────────────────────── */
+.pied-page {
+  display: flex;
+  gap: 12px;
+  margin-top: 28px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* ─── BOUTONS ───────────────────────────────────────────────── */
+.btn-nouvelle-partie,
+.btn-regles {
+  font-family: var(--police-corps);
+  font-size: 0.85rem;
+  letter-spacing: 0.06em;
+  padding: 10px 24px;
+  border-radius: 6px;
+  border: 2px solid var(--couleur-plateau-bord);
+  cursor: pointer;
+  transition: background 0.18s, color 0.18s;
+}
+
+.btn-nouvelle-partie {
+  background: var(--couleur-plateau-bord);
+  color: var(--couleur-fond);
+}
+
+.btn-nouvelle-partie:hover {
+  background: var(--couleur-graine);
+  border-color: var(--couleur-graine);
+}
+
+.btn-regles {
+  background: transparent;
+  color: var(--couleur-texte-doux);
+}
+
+.btn-regles:hover {
+  background: var(--couleur-case);
+}
+
+/* ─── MODALES ───────────────────────────────────────────────── */
+.modale-fond {
+  position: fixed;
+  inset: 0;
+  background: var(--couleur-modale-fond);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s;
+  padding: 16px;
+}
+
+.modale-fond.visible {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.modale {
+  background: var(--couleur-fond);
+  border: 2px solid var(--couleur-plateau-bord);
+  border-radius: 12px;
+  padding: 36px 40px;
+  max-width: 420px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 16px 48px rgba(30, 15, 0, 0.35);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.modale-titre {
+  font-family: var(--police-titre);
+  font-size: 1.6rem;
+  font-weight: normal;
+  color: var(--couleur-texte);
+  letter-spacing: 0.05em;
+}
+
+.modale-message {
+  font-size: 1rem;
+  color: var(--couleur-texte-doux);
+  line-height: 1.5;
+}
+
+.modale-scores {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  padding: 16px 0;
+  border-top: 1px solid var(--couleur-case-bord);
+  border-bottom: 1px solid var(--couleur-case-bord);
+}
+
+.modale-score-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.modale-score-nom {
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--couleur-texte-doux);
+}
+
+.modale-score-val {
+  font-size: 2.2rem;
+  font-family: var(--police-titre);
+  color: var(--couleur-texte);
+}
+
+/* Modale des règles : scrollable si contenu long */
+.modale-regles {
+  max-width: 500px;
+  text-align: left;
+  max-height: 85vh;
+  overflow-y: auto;
+}
+
+.regles-contenu {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.regles-contenu p {
+  font-size: 0.88rem;
+  line-height: 1.6;
+  color: var(--couleur-texte);
+}
+
+.regles-contenu strong {
+  color: var(--couleur-graine);
+}
+
+/* ─── ANIMATION DE SEMIS ─────────────────────────────────────
+ * Légère pulsation visuelle sur la case en cours de réception
+*/
+@keyframes pulsation-semis {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.06); }
+  100% { transform: scale(1); }
+}
+
+.case.semee {
+  animation: pulsation-semis 0.22s ease-in-out;
+}
+
+/* ─── RESPONSIVE ─────────────────────────────────────────────── */
+@media (max-width: 600px) {
+  :root {
+    --taille-case  : 44px;
+    --ecart-case   : 5px;
+  }
+
+  .titre-jeu {
+    font-size: 1.7rem;
+  }
+
+  .joueur-score {
+    font-size: 1.5rem;
+  }
+
+  .entete {
+    padding: 16px 12px 10px;
+  }
+
+  .plateau {
+    padding: 12px 10px;
+  }
+
+  .camp-etiquette {
+    width: 36px;
+    font-size: 0.62rem;
+  }
+
+  .etiquettes-colonnes {
+    padding-left: calc(44px + 8px);
+  }
+
+  .etiquettes-colonnes span {
+    width: 44px;
+    font-size: 0.6rem;
+  }
+
+  .case-compteur {
+    font-size: 1rem;
+  }
+
+  .graine-visuelle {
+    width: 7px;
+    height: 7px;
+  }
+
+  .modale {
+    padding: 24px 20px;
+  }
+}

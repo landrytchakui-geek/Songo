@@ -1,0 +1,144 @@
+<!-- TCHAKUI KENGNE NOE LANDRY 24F2520-->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Songo — Version Ekang</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ============================================================
+       EN-TÊTE DU JEU
+       Contient le titre et les informations des deux joueurs
+  ============================================================ -->
+  <header class="entete">
+    <div class="joueur-info" id="info-nord">
+      <span class="joueur-nom">Nord</span>
+      <span class="joueur-score-label">Graines capturées</span>
+      <span class="joueur-score" id="score-nord">0</span>
+    </div>
+
+    <div class="titre-bloc">
+      <h1 class="titre-jeu">Songo</h1>
+      <p class="sous-title code a ete generer , je dois maintenant comprendre toutes les parties des trois fichiers, commencons par le fichier index.html, tu dois m'expliquer en detail toutes les parties de ce fichiers, chaque balise de chaque partie, les headers, les main, les sections , les span , les div  etc je dis biens toutes les balises de chque parties, on doit decortiquer ce code.  pas d'erreur a faire s'il te plait re">Version Ekang</p>
+    </div>
+
+    <div class="joueur-info" id="info-sud">
+      <span class="joueur-nom">Sud</span>
+      <span class="joueur-score-label">Graines capturées</span>
+      <span class="joueur-score" id="score-sud">0</span>
+    </div>
+  </header>
+
+  <!-- ============================================================
+       BANDEAU DE STATUT
+       Affiche l'état courant du jeu (tour, message, avertissements)
+  ============================================================ -->
+  <section class="bandeau-statut">
+    <p class="message-tour" id="message-tour">C'est au tour de Sud</p>
+    <p class="message-info" id="message-info"></p>
+  </section>
+
+  <!-- ============================================================
+       PLATEAU DE JEU
+       Structure : camp Nord (rangée haute) + camp Sud (rangée basse)
+       Chaque camp contient 7 cases numérotées de gauche à droite (index 0→6)
+  ============================================================ -->
+  <main class="plateau-conteneur">
+    <div class="plateau" id="plateau">
+
+      <!-- Étiquettes des colonnes (1 à 7) -->
+      <div class="etiquettes-colonnes" aria-hidden="true">
+        <span>7</span><span>6</span><span>5</span>
+        <span>4</span><span>3</span><span>2</span><span>1</span>
+      </div>
+
+      <!-- Camp NORD : cases 0 à 6 (la case 0 est à gauche de Nord, donc la droite du plateau) -->
+      <!-- Note : Pour Nord, la case index 0 est visuellement à GAUCHE,
+           mais dans la mécanique du jeu, la case 0 de Nord correspond
+           à la case n°1 (la plus à gauche vue par Nord). -->
+      <div class="camp" id="camp-nord" data-camp="nord">
+        <span class="camp-etiquette">Nord</span>
+        <div class="rangee" id="rangee-nord">
+          <!-- Les cases sont générées dynamiquement par JavaScript -->
+        </div>
+      </div>
+
+      <!-- Séparateur visuel entre les deux camps -->
+      <div class="separateur" aria-hidden="true"></div>
+
+      <!-- Camp SUD : cases 0 à 6 (la case 0 est à GAUCHE de Sud) -->
+      <div class="camp" id="camp-sud" data-camp="sud">
+        <div class="rangee" id="rangee-sud">
+          <!-- Les cases sont générées dynamiquement par JavaScript -->
+        </div>
+        <span class="camp-etiquette">Sud</span>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ============================================================
+       PIED DE PAGE — CONTRÔLES
+       Bouton de réinitialisation et aide sur les règles
+  ============================================================ -->
+  <footer class="pied-page">
+    <button class="btn-nouvelle-partie" id="btn-nouvelle-partie">
+      Nouvelle partie
+    </button>
+    <button class="btn-regles" id="btn-regles">
+      Règles du jeu
+    </button>
+  </footer>
+
+  <!-- ============================================================
+       MODALE DE FIN DE PARTIE
+       Affichée lorsqu'un joueur gagne ou que la partie se termine
+  ============================================================ -->
+  <div class="modale-fond" id="modale-fond" aria-hidden="true">
+    <div class="modale" role="dialog" aria-labelledby="modale-titre">
+      <h2 class="modale-titre" id="modale-titre">Fin de partie</h2>
+      <p class="modale-message" id="modale-message"></p>
+      <div class="modale-scores">
+        <div class="modale-score-item">
+          <span class="modale-score-nom">Nord</span>
+          <span class="modale-score-val" id="modale-score-nord">0</span>
+        </div>
+        <div class="modale-score-item">
+          <span class="modale-score-nom">Sud</span>
+          <span class="modale-score-val" id="modale-score-sud">0</span>
+        </div>
+      </div>
+      <button class="btn-nouvelle-partie" id="btn-rejouer">
+        Rejouer
+      </button>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       MODALE DES RÈGLES
+       Résumé des règles pour consultation en cours de partie
+  ============================================================ -->
+  <div class="modale-fond" id="modale-regles-fond" aria-hidden="true">
+    <div class="modale modale-regles" role="dialog" aria-label="Règles du jeu">
+      <h2 class="modale-titre">Règles — Songo Ekang</h2>
+      <div class="regles-contenu">
+        <p><strong>Objectif :</strong> Capturer 40 graines ou plus.</p>
+        <p><strong>Plateau :</strong> 2 rangées de 7 cases, 5 graines par case au départ.</p>
+        <p><strong>Semis :</strong> Cliquez sur une case de votre camp. Les graines sont semées une par une : droite→gauche dans votre camp, puis gauche→droite chez l'adversaire.</p>
+        <p><strong>Plus de 13 graines :</strong> La case de départ est sautée ; on distribue ensuite uniquement chez l'adversaire (gauche→droite).</p>
+        <p><strong>Captures :</strong> Si la dernière graine tombe chez l'adversaire sur une case à 1, 2 ou 3 graines (→ 2, 3 ou 4 après dépôt), ces graines sont capturées. La prise remonte en chaîne si la case précédente remplit aussi la condition.</p>
+        <p><strong>Case n°1 adverse :</strong> Pas de prise directe, sauf en chaîne ou après un tour complet (&gt;14 graines, une seule graine prise).</p>
+        <p><strong>Solidarité :</strong> Si l'adversaire n'a plus de graines, vous devez lui en distribuer (minimum 7 si possible).</p>
+        <p><strong>Interdits :</strong> Ne pas semer 1 ou 2 graines chez l'adversaire depuis sa case n°7. Ne pas vider totalement le camp adverse (aucune prise dans ce cas).</p>
+        <p><strong>Fin :</strong> Solidarité impossible, ou moins de 10 graines sur le plateau. Chaque camp récupère ses graines restantes.</p>
+      </div>
+      <button class="btn-nouvelle-partie" id="btn-fermer-regles">Fermer</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
