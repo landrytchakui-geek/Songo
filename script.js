@@ -12,7 +12,7 @@
 ───────────────────────────────────────────────────────────── */
 
 const NB_CASES = 7;
-const GRAINES_DEPART = 3;
+const GRAINES_DEPART = 5;
 const TOTAL_GRAINES = NB_CASES * 2 * GRAINES_DEPART; // 70
 const SCORE_VICTOIRE = 40;
 const SEUIL_FIN_PLATEAU = 10;
